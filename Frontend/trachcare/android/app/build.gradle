@@ -1,0 +1,93 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '7'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '2.0'
+}
+  def keystoreProperties = new Properties()
+  def keystorePropertiesFile = rootProject.file('key.properties')
+  def hasReleaseKeystore = false
+  if (keystorePropertiesFile.exists()) {
+      keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+      hasReleaseKeystore = keystoreProperties['storeFile'] != null &&
+                           file(keystoreProperties['storeFile']).exists()
+}
+
+
+android {
+    namespace = "com.simats.trachcare"
+    compileSdk = 36
+    ndkVersion = "30.0.16248370"
+
+    lintOptions {
+        disable 'Deprecation'
+    }
+
+    compileOptions {
+        // flutter_local_notifications schedules against java.time.
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.simats.trachcare"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        minSdkVersion = flutter.minSdkVersion
+        targetSdk = 35
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    signingConfigs {
+       release {
+           if (hasReleaseKeystore) {
+               keyAlias keystoreProperties['keyAlias']
+               keyPassword keystoreProperties['keyPassword']
+               storeFile file(keystoreProperties['storeFile'])
+               storePassword keystoreProperties['storePassword']
+           }
+        }
+    }
+
+    buildTypes {
+        release {
+            // key.properties is not in the repo, and signing with a null keystore
+            // made `flutter build apk --release` fail outright. Fall back to the
+            // debug keys so a release build is always produced; ship Play Store
+            // uploads only once key.properties is present.
+            signingConfig = hasReleaseKeystore ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
+}
