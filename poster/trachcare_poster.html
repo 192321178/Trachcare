@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TrachCare — Project Poster</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --teal: #0f766e;
+    --teal-dk: #115e59;
+    --teal-lt: #ccfbf1;
+    --mint: #ecfdf5;
+    --ink: #0f172a;
+    --muted: #475569;
+    --line: #cbd5e1;
+    --card: #ffffff;
+    --bg: #f1f5f9;
+  }
+  body {
+    background: var(--bg);
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--ink);
+  }
+  /* A1 landscape ratio poster sheet */
+  .poster {
+    width: 1400px;
+    margin: 24px auto;
+    background: #fff;
+    border: 3px solid var(--teal-dk);
+    padding: 26px 30px;
+  }
+  /* ─── Header ─── */
+  .poster-head {
+    background: linear-gradient(90deg, var(--teal-dk), var(--teal));
+    color: #fff;
+    border-radius: 10px;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  .poster-head .logo {
+    width: 54px; height: 54px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--teal-dk); font-size: 26px; font-weight: 800;
+  }
+  .poster-head h1 { font-size: 34px; letter-spacing: .5px; }
+  .poster-head p  { font-size: 15px; opacity: .9; margin-top: 2px; }
+  /* ─── Grid layout ─── */
+  .grid { display: grid; grid-template-columns: 1.05fr 1fr 1.05fr; gap: 18px; }
+  .col { display: flex; flex-direction: column; gap: 18px; }
+  section {
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: var(--card);
+  }
+  h2 {
+    font-size: 16px;
+    color: var(--teal-dk);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--teal);
+    padding-bottom: 5px;
+    margin-bottom: 9px;
+  }
+  p, li { font-size: 12.5px; line-height: 1.5; color: var(--ink); }
+  ul { padding-left: 16px; }
+  li { margin-bottom: 3px; }
+  b.tag { color: var(--teal-dk); }
+  .small { font-size: 11.5px; color: var(--muted); }
+  /* competitive analysis */
+  .comp {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+    margin-bottom: 8px;
+  }
+  .comp .app {
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px; text-align: center; font-weight: 600; font-size: 12px;
+    background: var(--mint); color: var(--teal-dk);
+  }
+  .cmp-note { font-size: 11.5px; margin-top: 6px; }
+  /* persona */
+  .persona { display: flex; gap: 12px; align-items: flex-start; }
+  .avatar {
+    width: 74px; height: 74px; border-radius: 50%;
+    background: linear-gradient(135deg,#94a3b8,#64748b);
+    flex-shrink: 0; display:flex;align-items:center;justify-content:center;
+    color:#fff; font-size:30px; font-weight:700;
+  }
+  /* flow diagram */
+  .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .fbox {
+    background: var(--teal-lt); border: 1.5px solid var(--teal);
+    border-radius: 8px; padding: 6px 10px; font-size: 11px;
+    font-weight: 700; color: var(--teal-dk); text-align: center;
+  }
+  .farr { color: var(--teal); font-weight: 800; font-size: 14px; }
+  .flow-row { display:flex; justify-content:center; gap:6px; margin-top:8px; flex-wrap:wrap; }
+  /* specs table */
+  table { width: 100%; border-collapse: collapse; }
+  td { font-size: 12px; padding: 3.5px 4px; border-bottom: 1px solid #e2e8f0; }
+  td:first-child { font-weight: 700; color: var(--teal-dk); width: 42%; }
+  /* timeline */
+  .tl { display: flex; justify-content: space-between; gap: 6px; }
+  .tl .step {
+    flex:1; text-align:center; font-size: 10.5px; line-height:1.35;
+  }
+  .tl .dot {
+    width: 30px; height: 30px; margin: 0 auto 5px;
+    border-radius: 50%; background: var(--teal);
+    color: #fff; font-weight: 800; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* phone mockups */
+  .phones { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .phone {
+    width: 92px; height: 185px; border: 2.5px solid var(--ink);
+    border-radius: 16px; background: #f8fafc; overflow: hidden;
+    position: relative; flex-shrink: 0;
+  }
+  .phone .ph-head {
+    background: var(--teal); color:#fff; font-size: 8.5px;
+    padding: 6px 6px 10px; font-weight: 700;
+  }
+  .phone .bar { height: 6px; background:#e2e8f0; border-radius:3px; margin:6px 8px; }
+  .phone .bar.w60 { width: 55%; }
+  .phone .bar.w80 { width: 75%; }
+  .phone .card {
+    margin: 6px 8px; border:1px solid #e2e8f0; border-radius:6px;
+    background:#fff; padding:5px;
+  }
+  .phone .chip {
+    display:inline-block; background:var(--teal-lt); color:var(--teal-dk);
+    border-radius:8px; font-size:7px; padding:2px 6px; font-weight:700;
+  }
+  .phone .btn {
+    margin: 8px 8px 4px; background: var(--teal); color:#fff;
+    text-align:center; border-radius:8px; font-size:8px;
+    padding:5px 0; font-weight:700;
+  }
+  .phone .ecg {
+    margin: 4px 8px; height: 18px;
+    background: repeating-linear-gradient(90deg, transparent 0 8px, #e2e8f0 8px 9px);
+    position: relative;
+  }
+  .phone .ecg::after {
+    content:""; position:absolute; left:0; top:8px; width:100%; height:2px;
+    background: linear-gradient(90deg, var(--teal) 60%, transparent 60%);
+    clip-path: polygon(0 50%,15% 50%,20% 0,30% 100%,35% 50%,55% 50%,60% 20%,70% 90%,75% 50%,100% 50%);
+  }
+  .cap { font-size: 8.5px; text-align: center; color: var(--muted); margin-top: 3px; }
+  .mock-wrap { text-align:center; }
+  /* footer */
+  .poster-foot {
+    margin-top: 20px; background: var(--teal-dk); color:#fff;
+    border-radius: 10px; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .poster-foot .qr {
+    width: 72px; height: 72px; background:#fff; border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--teal-dk); font-size:9px; font-weight:700; text-align:center;
+  }
+  .poster-foot .who { font-size: 13px; }
+  .poster-foot .who b { font-size: 16px; }
+  @media print {
+    body { background: #fff; }
+    .poster { margin: 0; width: 100%; border: none; }
+    @page { size: A1 landscape; margin: 8mm; }
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- ══════════ HEADER ══════════ -->
+  <div class="poster-head">
+    <div class="logo">T</div>
+    <div>
+      <h1>TrachCare: A Tracheostomy Care and Monitoring App</h1>
+      <p>Guided tracheostomy care at home — connecting patients, doctors and admins on one platform</p>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ══════════ COLUMN 1 ══════════ -->
+    <div class="col">
+
+      <section>
+        <h2>Concept</h2>
+        <p><b class="tag">TrachCare</b> is a tracheostomy self-management app that lets
+        patients log daily health updates — respiratory rate, heart rate, SpO&#8322;,
+        tube and surgery status — while doctors monitor them remotely. Doctors review
+        daily reports, spot red flags early and manage their patient list; admins manage
+        doctor approvals, accounts and a therapy-video library. Role-based access keeps
+        Patient, Doctor and Admin experiences separate on a single backend.</p>
+      </section>
+
+      <section>
+        <h2>Competitive Analysis</h2>
+        <div class="comp">
+          <div class="app">MyTherapy</div>
+          <div class="app">Medisafe</div>
+          <div class="app">CareClinic</div>
+          <div class="app">Patient.info</div>
+        </div>
+        <p class="cmp-note"><b>MyTherapy —</b> general medication reminders, no
+        procedure-specific tracking.<br>
+        <b>Medisafe —</b> strong pill reminders, but no doctor monitoring loop.<br>
+        <b>CareClinic —</b> broad symptom diary, not built for tracheostomy care.<br>
+        <b>Patient.info —</b> education content only, no reporting or clinician link.</p>
+        <p class="cmp-note"><b class="tag">TrachCare's edge:</b> the only app that pairs
+        daily tracheostomy-specific vitals reporting with a doctor review workflow and
+        a guided video library — purpose-built for post-surgical tracheostomy patients.</p>
+      </section>
+
+      <section>
+        <h2>Problem Statement</h2>
+        <p>Tracheostomy patients discharged home must perform daily care — tube checks,
+        dressing changes, suctioning — while watching for warning signs. Today this is
+        tracked on paper: caregivers forget entries, doctors see patients only at
+        monthly reviews, and early deterioration goes unnoticed until it becomes an
+        emergency. There is no structured channel for a doctor to check a patient's
+        daily status between visits.</p>
+      </section>
+
+      <section>
+        <h2>User Persona</h2>
+        <div class="persona">
+          <div class="avatar">S</div>
+          <div>
+            <p><b>Name:</b> Santhosh &nbsp;·&nbsp; <b>Age:</b> 58</p>
+            <p><b>Profile:</b> post-surgical tracheostomy patient recovering at home.</p>
+            <p><b>Pain points:</b> unsure what to record each day, forgets care steps,
+            can't reach the doctor quickly, no feedback on whether his readings are normal.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ══════════ COLUMN 2 ══════════ -->
+    <div class="col">
+
+      <section>
+        <h2>Methods</h2>
+        <ul>
+          <li><b>Daily health report:</b> vitals (RR, HR, SpO&#8322;), tube status,
+          comorbidities and lab values submitted from the patient app.</li>
+          <li><b>Doctor monitoring:</b> patient list, daily-update review and
+          flagged-report alerts for abnormal readings.</li>
+          <li><b>Secure onboarding:</b> role-based login, OTP email verification,
+          admin approval for new doctors.</li>
+          <li><b>Education library:</b> therapy videos with thumbnails published by
+          the admin and streamed in-app.</li>
+          <li><b>Spigotting tracker:</b> weaning/decannulation status visible to both
+          patient and doctor.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>User Flow Diagram</h2>
+        <div class="flow">
+          <div class="fbox">Login<br>(3 roles)</div>
+          <div class="farr">→</div>
+          <div class="fbox">Dashboard</div>
+          <div class="farr">→</div>
+          <div class="fbox">Daily<br>Report</div>
+          <div class="farr">→</div>
+          <div class="fbox">Server<br>(PHP/MySQL)</div>
+        </div>
+        <div class="flow-row">
+          <div class="fbox">Patient:<br>report · videos · reminders</div>
+          <div class="fbox">Doctor:<br>monitor · flag · manage</div>
+          <div class="fbox">Admin:<br>approve · publish · users</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Programming Specifications</h2>
+        <table>
+          <tr><td>Frontend</td><td>Flutter / Dart (Android)</td></tr>
+          <tr><td>Backend</td><td>PHP REST API (JSON)</td></tr>
+          <tr><td>Database</td><td>MariaDB / MySQL</td></tr>
+          <tr><td>Server</td><td>XAMPP Apache</td></tr>
+          <tr><td>Auth</td><td>Role login + OTP verification</td></tr>
+          <tr><td>Media</td><td>media_kit video streaming</td></tr>
+          <tr><td>Uploads</td><td>Multipart images &amp; video (≤250 MB)</td></tr>
+          <tr><td>Distribution</td><td>Signed APK / AAB — API 36</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Solution</h2>
+        <p>TrachCare replaces the paper diary with a guided daily check-in: the patient
+        answers structured vitals questions, the doctor reviews every submission and is
+        alerted to red flags, and the admin keeps accounts and training content current
+        — closing the monitoring gap between hospital and home.</p>
+      </section>
+
+      <section>
+        <h2>Business Potential</h2>
+        <ul>
+          <li>Hospitals &amp; ENT departments discharging tracheostomy patients</li>
+          <li>Home-care and rehabilitation providers</li>
+          <li>Subscription model for clinics monitoring patient panels</li>
+          <li>Framework extends to other post-surgical home-care pathways</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- ══════════ COLUMN 3 ══════════ -->
+    <div class="col">
+
+      <section>
+        <h2>Project Timeline</h2>
+        <div class="tl">
+          <div class="step"><div class="dot">1</div>Analysis &amp;<br>requirement</div>
+          <div class="step"><div class="dot">2</div>UI design &amp;<br>wireframes</div>
+          <div class="step"><div class="dot">3</div>Backend API &amp;<br>database</div>
+          <div class="step"><div class="dot">4</div>App dev &amp;<br>integration</div>
+          <div class="step"><div class="dot">5</div>Testing &amp;<br>release</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Paper Wireframes → Low Fidelity</h2>
+        <div class="phones">
+          <div class="mock-wrap">
+            <div class="phone">
+              <div class="ph-head">TrachCare</div>
+              <div class="bar w60"></div>
+              <div class="card"><div class="bar w80"></div><div class="bar w60"></div></div>
+              <div class="card"><div class="bar w80"></div><div class="bar w60"></div></div>
+              <div class="btn">Sign in</div>
+            </div>
+            <div class="cap">1 Login</div>
+          </div>
+          <div class="mock-wrap">
+            <div class="phone">
+              <div class="ph-head">Daily Update</div>
+              <div class="card"><div class="bar w60"></div><span class="chip">RR · HR</span></div>
+              <div class="card"><div class="bar w60"></div><span class="chip">SpO&#8322;</span></div>
+              <div class="card"><div class="bar w60"></div><span class="chip">Tube</span></div>
+              <div class="btn">Submit</div>
+            </div>
+            <div class="cap">2 Daily report</div>
+          </div>
+          <div class="mock-wrap">
+            <div class="phone">
+              <div class="ph-head">Doctor</div>
+              <div class="card"><div class="bar w80"></div><div class="bar w60"></div></div>
+              <div class="card"><div class="bar w80"></div><span class="chip">FLAGGED</span></div>
+              <div class="card"><div class="bar w80"></div><div class="bar w60"></div></div>
+            </div>
+            <div class="cap">3 Doctor review</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>High Fidelity → Final Product</h2>
+        <div class="phones">
+          <div class="mock-wrap">
+            <div class="phone">
+              <div class="ph-head">Welcome back</div>
+              <div class="card"><div class="bar w80"></div></div>
+              <div class="card"><div class="bar w80"></div></div>
+              <div class="btn">Sign in</div>
+              <div class="ecg"></div>
+            </div>
+            <div class="cap">Login</div>
+          </div>
+          <div class="mock-wrap">
+            <div class="phone">
+              <div class="ph-head">Dashboard</div>
+              <div class="ecg"></div>
+              <div class="card"><span class="chip">Vitals ok</span><div class="bar w80"></div></div>
+              <div class="card"><div class="bar w60"></div><div class="bar w80"></div></div>
+            </div>
+            <div class="cap">Patient dashboard</div>
+          </div>
+          <div class="mock-wrap">
+            <div class="phone">
+              <div class="ph-head">Patients</div>
+              <div class="card"><div class="bar w60"></div><span class="chip">stable</span></div>
+              <div class="card"><div class="bar w60"></div><span class="chip">review</span></div>
+              <div class="card"><div class="bar w60"></div><span class="chip">stable</span></div>
+            </div>
+            <div class="cap">Doctor monitor</div>
+          </div>
+          <div class="mock-wrap">
+            <div class="phone">
+              <div class="ph-head">Admin</div>
+              <div class="card"><div class="bar w80"></div><span class="chip">3 pending</span></div>
+              <div class="card"><div class="bar w80"></div><div class="bar w60"></div></div>
+              <div class="btn">Approve</div>
+            </div>
+            <div class="cap">Admin console</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <div class="poster-foot">
+    <div class="who">
+      <b>TrachCare — Tracheostomy care, guided at home</b><br>
+      Patient · Doctor · Admin &nbsp;|&nbsp; Flutter + PHP + MySQL &nbsp;|&nbsp; Android release
+    </div>
+    <div class="who" style="text-align:right">
+      <b>Your Name</b><br>
+      Dept. / Reg. No.<br>
+      your.email@college.edu
+    </div>
+    <div class="qr">QR CODE<br>(app link)</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- The TrachCare API is served over plain HTTP on the clinic's XAMPP box.
+         Allow cleartext only for that host — every other domain stays on the
+         platform default (HTTPS required). -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">180.235.121.245</domain>
+    </domain-config>
+    <base-config cleartextTrafficPermitted="false" />
+</network-security-config>
